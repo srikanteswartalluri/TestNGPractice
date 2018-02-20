@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "testng-1.0.dtd" >
+
+<suite name="test reports related tests">
+    <test name="TestReports">
+        <groups>
+            <run>
+                <include name="smoke" />
+                <exclude name="broken"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="TestReports" />
+            <class name="TestManagerTestNG"/>
+
+
+
+
+
+        </classes>
+
+    </test>
+</suite>

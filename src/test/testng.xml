@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+
+
+<suite name="TestManagerTestNG">
+   <test name="TestManagerTestNG">
+       <groups>
+           <run>
+               <include name="default"/>
+               <exclude name="Smoke" />
+               <include name="Functional"/>
+           </run>
+       </groups>
+       <classes>
+           <class name="TestManagerTestNG" />
+           <class name="TestNew" />
+           <class name="TestReports" />
+       </classes>
+
+
+   </test>
+</suite>
