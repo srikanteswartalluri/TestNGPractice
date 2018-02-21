@@ -3,12 +3,7 @@
 
 <suite name="test reports related tests">
     <test name="TestReports">
-        <groups>
-            <run>
-                <include name="smoke" />
-                <exclude name="broken"/>
-            </run>
-        </groups>
+
         <classes>
             <class name="TestReports" />
             <class name="TestManagerTestNG"/>
