@@ -17,14 +17,14 @@ public class TestManagerTestNG {
 
         //set the experience for John
         m.setExp(11);
-        //compute actual bonus you are expecting
-        double actualBonus = m.getSalary() * .16;
+        //compute  bonus you are expecting
+        double expectedBonus = m.getSalary() * .16;
 
         //validation
         int experience = m.getExp();
         double bonus = m.getBonus(experience);
 
-        int equal = Double.compare(actualBonus, bonus);
+        int equal = Double.compare(expectedBonus, bonus);
 
         Assert.assertEquals(equal,0, "Validation failed for getBonus method");
 

@@ -1,4 +1,13 @@
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import org.testng.Assert;
 import org.testng.annotations.*;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 
 public class TestReports {
 
@@ -27,10 +36,21 @@ public class TestReports {
         System.out.println("report setup method");
     }
 
-    @Test(groups = {"smoke"})
+    @AfterGroups(groups = "smoke")
+    public void groupCleanup(){
+        System.out.println("group cleanup");
+    }
+    @BeforeGroups(groups = "smoke")
+    public void groupSetup(){
+        System.out.println("group setup");
+    }
+
+    @Test(groups = {"smoke"}, invocationCount = 3)
     public void testReport2(){
         System.out.println("report test1");
+
     }
+
     @Test(timeOut = 2000, groups = {"smoke"})
     public void testTimeout() throws InterruptedException {
         Thread.sleep(4000);
@@ -45,7 +65,57 @@ public class TestReports {
         System.out.println(result);
     }
 
+    @DataProvider(name="loginDetails")
+    public Object[][] dprovider(){
+        Object[][] aList = {{"test1@gmail.com", "password"}, {"test2@gmail.com", "password"}};
+        return aList;
+    }
 
+    @DataProvider(name="excelData")
+    public Object[][] excelProvider(){
+        Object[][] excelData =  getExcelData("/Users/stalluri/Downloads/testExcel.xls","Sheet1");
+        return excelData;
+    }
+
+    /**
+     * @param fileName file Name
+     * @param sheetName sheet Name
+     * @return
+     */
+    public String[][] getExcelData(String fileName, String sheetName) {
+        String[][] arrayExcelData = null;
+        try {
+            FileInputStream fs = new FileInputStream(fileName);
+            Workbook wb = Workbook.getWorkbook(fs);
+            Sheet sh = wb.getSheet(sheetName);
+
+            int totalNoOfCols = sh.getColumns();
+            int totalNoOfRows = sh.getRows();
+
+            arrayExcelData = new String[totalNoOfRows-1][totalNoOfCols];
+
+            for (int i= 1 ; i < totalNoOfRows; i++) {
+
+                for (int j=0; j < totalNoOfCols; j++) {
+                    arrayExcelData[i-1][j] = sh.getCell(j, i).getContents();
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+            e.printStackTrace();
+        } catch (BiffException e) {
+            e.printStackTrace();
+        }
+        return arrayExcelData;
+    }
+
+    @Test(groups = "test", dataProvider = "excelData")
+    public void TestDP(String userName, String password){
+        System.out.println("username: " + userName + " Password: " + password);
+    }
     @Test(groups = {"smoke"})
     public void testReport112(){
         System.out.println("report test2");
