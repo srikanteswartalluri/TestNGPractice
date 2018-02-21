@@ -51,7 +51,7 @@ public class TestReports {
 
     }
 
-    @Test(timeOut = 2000, groups = {"smoke"})
+    @Test(timeOut = 5000, groups = {"smoke"})
     public void testTimeout() throws InterruptedException {
         Thread.sleep(4000);
     }
