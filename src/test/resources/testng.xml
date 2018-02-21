@@ -11,11 +11,8 @@
         </groups>
         <classes>
             <class name="TestReports" />
-
-
-
-
-
+            <class name="TestManagerTestNG"/>
+            <class name="TestNew"/>
 
         </classes>
 
