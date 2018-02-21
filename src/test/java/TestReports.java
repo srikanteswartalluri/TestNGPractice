@@ -48,13 +48,14 @@ public class TestReports {
     @Test(groups = {"smoke"}, invocationCount = 3)
     public void testReport2(){
         System.out.println("report test1");
+        Assert.fail("Test failed intentionally");
 
     }
 
-    @Test(timeOut = 5000, groups = {"smoke"})
-    public void testTimeout() throws InterruptedException {
-        Thread.sleep(4000);
-    }
+//    @Test(timeOut = 5000, groups = {"smoke"})
+//    public void testTimeout() throws InterruptedException {
+//        Thread.sleep(4000);
+//    }
 
     @Test(groups = {"smoke"}, expectedExceptions = ArithmeticException.class)
     public void testException(){
@@ -119,6 +120,8 @@ public class TestReports {
     @Test(groups = {"smoke"})
     public void testReport112(){
         System.out.println("report test2");
+        int a = 0;
+        Assert.assertEquals(a, 1, "values didnt match");
     }
 
 
