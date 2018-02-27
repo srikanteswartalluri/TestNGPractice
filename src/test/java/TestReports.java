@@ -36,10 +36,26 @@ public class TestReports {
         System.out.println("report setup method");
     }
 
+
+    @BeforeGroups(groups = "stress")
+    public void groupSetupStress(){
+        System.out.println("group setup");
+    }
+
     @AfterGroups(groups = "smoke")
     public void groupCleanup(){
         System.out.println("group cleanup");
     }
+    @BeforeTest(alwaysRun = true)
+    public void beforeTest(){
+        System.out.println("====before test===");
+    }
+
+    @AfterTest(alwaysRun = true)
+    public void afterTest(){
+        System.out.println("====after test===");
+    }
+
     @BeforeGroups(groups = "smoke")
     public void groupSetup(){
         System.out.println("group setup");

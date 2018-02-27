@@ -3,13 +3,26 @@
 
 <suite name="test reports related tests">
     <test name="TestReports">
-
+        <groups>
+            <run>
+                <include name="test" />
+                <exclude name="broken"/>
+            </run>
+        </groups>
         <classes>
             <class name="TestReports" />
-            <class name="TestManagerTestNG"/>
-            <class name="TestNew"/>
+
 
         </classes>
 
     </test>
+    <test name="test">
+        <classes>
+
+
+            <class name="TestNew"/>
+            <class name="TestManagerTestNG"/>
+        </classes>
+    </test>
+
 </suite>

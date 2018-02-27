@@ -10,7 +10,21 @@ public class TestManagerTestNG {
         System.out.println("In setup Method");
         m  = new Manager("John", 23, 2000);
     }
+
+//    @BeforeTest(alwaysRun = true)
+//    public void beforeTest(){
+//        System.out.println("====TestManagerTestNG: before test===");
+//    }
+//
+//    @AfterTest(alwaysRun = true)
+//    public void afterTest(){
+//        System.out.println("====TestManagerTestNG: after test===");
+//    }
     //tests
+
+
+
+
     @Test(groups = {"Smoke","Functional"})
     public void testGetBonus(){
         System.out.println("In test1");

@@ -20,6 +20,15 @@ public class TestNew {
     public void test1(){
         System.out.println("test1");
     }
+    @BeforeTest(alwaysRun = true)
+    public void beforeTest(){
+        System.out.println("====TestNew: before test===");
+    }
+
+    @AfterTest(alwaysRun = true)
+    public void afterTest(){
+        System.out.println("====TestNew: after test===");
+    }
 
     @Test(priority = 1)
     public void test2(){
