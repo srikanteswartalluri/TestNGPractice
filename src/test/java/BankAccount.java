@@ -15,7 +15,8 @@ public class BankAccount{
         if(balance>amount){
             balance = balance-amount;
         }else{
-            throw new InsufficientBalanceException();
+            InsufficientBalanceException n = new InsufficientBalanceException();
+            throw n;
         }
     }
 

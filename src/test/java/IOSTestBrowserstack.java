@@ -1,15 +1,18 @@
 
 import java.net.URL;
-        import java.util.List;
-        import java.net.MalformedURLException;
+import java.util.List;
+import java.net.MalformedURLException;
 
-        import org.openqa.selenium.support.ui.WebDriverWait;
-        import org.openqa.selenium.remote.DesiredCapabilities;
-        import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-        import io.appium.java_client.MobileBy;
-        import io.appium.java_client.ios.IOSDriver;
-        import io.appium.java_client.ios.IOSElement;
+
+
+
 
 public class IOSTestBrowserstack {
     public static String accessKey = "e5Tr2M54gE1xjmwkNwvU";
@@ -23,22 +26,28 @@ public class IOSTestBrowserstack {
         caps.setCapability("app", "bs://f938e378cf7750c0a5234fb1b7241cbb88b7a1f9");
 
 
-        IOSDriver driver = new IOSDriver(new URL("http://"+userName+":"+accessKey+"@hub-cloud.browserstack.com/wd/hub"), caps);
+        RemoteWebDriver driver = new RemoteWebDriver(new URL("http://"+userName+":"+accessKey+"@hub-cloud.browserstack.com/wd/hub"), caps);
 
-        IOSElement loginButton = (IOSElement) new WebDriverWait(driver, 30).until(
-                ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Log In")));
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement loginButton = driver.findElement(By.id("Log In"));
+        wait.until(
+                ExpectedConditions.elementToBeClickable(loginButton)
+        );
         loginButton.click();
-        IOSElement emailTextField = (IOSElement) new WebDriverWait(driver, 30).until(
-                ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Email address")));
+
+        wait = new WebDriverWait(driver, 30);
+        WebElement  emailTextField= driver.findElement(By.id("Email address"));
+          wait.until(
+                ExpectedConditions.elementToBeClickable(emailTextField));
         emailTextField.sendKeys("hello@browserstack.com");
 
-        driver.findElementByAccessibilityId("Next").click();
+        driver.findElement(By.id("Next")).click();
         Thread.sleep(5000);
 
-        List<IOSElement> textElements = driver.findElementsByXPath("//XCUIElementTypeStaticText");
+        List<WebElement> textElements = driver.findElements(By.xpath("//XCUIElementTypeStaticText"));
         assert(textElements.size() > 0);
         String matchedString = "";
-        for(IOSElement textElement : textElements) {
+        for(WebElement textElement : textElements) {
             String textContent = textElement.getText();
             if(textContent != null && textContent.contains("not registered")) {
                 matchedString = textContent;
